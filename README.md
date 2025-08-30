@@ -19,7 +19,8 @@ Operation Borderless is a fintech platform for managing digital wallets holding 
 
 - **React**: JavaScript library for building the user interface.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
-- **Axios**: For making API requests to the backend.
+- **RTK QUERY**: For making API requests to the backend.
+- **RTK**: For global state management.
 - **React Router**: For client-side routing.
 - **Node.js**: For development and build tools.
 
