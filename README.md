@@ -1,103 +1,37 @@
-# Frontend - Project Delta
+# Operation Borderless Frontend
 
-This is the **frontend** for Project Delta, built with **React**, **Vite**, **Redux Toolkit**, **RTK Query**, and **React Hook Form**. It communicates with the backend API for authentication, protected routes, and CRUD operations.
+## Overview
 
----
+Operation Borderless is a fintech platform for managing digital wallets holding multiple stablecoins. This frontend, built with React and Tailwind CSS, provides an intuitive interface to interact with the backend API (hosted at `github.com/toluhikay/fx-exchange`). Users can create wallets, deposit funds, swap currencies, transfer funds between wallets, view transaction history, and check balances with their total USD equivalent. The frontend is designed for simplicity, security, and responsiveness, delivering a seamless user experience for managing stablecoin wallets.
 
-## 🚀 Features
+## Features
 
-- **Vite** for fast build and development
-- **React** with functional components and hooks
-- **Redux Toolkit** for state management
-- **RTK Query** for API requests and caching
-- **React Hook Form** for form handling and validation
-- **Protected Routes** using React Router
-- Authentication with token storage
-- Modular folder structure for scalability
+- **Wallet Creation**: Create a wallet with a unique email or mobile identifier.
+- **Deposit**: Add funds to a wallet in supported stablecoins (e.g., cNGN, USDx).
+- **Swap**: Convert funds between stablecoins using real-time exchange rates.
+- **Transfer**: Send funds to another wallet, tracking both sender and receiver.
+- **Transaction History**: View all wallet operations (deposits, swaps, transfers).
+- **Balances**: Display all stablecoin balances and their total USD equivalent.
+- **Authentication**: Secure access with JWT-based authentication.
+- **Responsive Design**: Mobile-friendly UI styled with Tailwind CSS.
 
----
+## Tech Stack
 
-## 📂 Folder Structure
+- **React**: JavaScript library for building the user interface.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Axios**: For making API requests to the backend.
+- **React Router**: For client-side routing.
+- **Node.js**: For development and build tools.
 
-```
-frontend/
-├── public/                # Static assets
-├── src/
-│   ├── app/               # Redux store setup
-│   ├── components/        # Reusable UI components
-│   ├── features/          # RTK slices & queries
-│   ├── hooks/             # Custom hooks
-│   ├── pages/             # Page components (Login, Dashboard, etc.)
-│   ├── routes/            # Route configuration and protected route logic
-│   ├── main.tsx           # Application entry point
-│   └── vite-env.d.ts      # Vite TypeScript definitions
-├── index.html
-├── package.json
-└── vite.config.ts
-```
+## Prerequisites
 
----
+- **Node.js**: Version 16 or higher.
+- **npm**: Version 8 or higher.
+- **JWT Token**: Required for authenticated API requests (obtain from backend authentication endpoint).
 
-## 🛠 Installation & Setup
+## Installation
 
-1. **Clone the repository**
-
+1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/toluhikay/project-delta-front.git
-   cd project-delta-frontend
+   git clone https://github.com/tolukay/fx-exchange-front
    ```
-
-2. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables**
-   Create a `.env` file in the root:
-
-   ```env
-   VITE_APP_BASE_URL=http://localhost:8080/api
-   ```
-
-4. **Run development server**
-
-   ```bash
-   npm run dev
-   ```
-
-5. **Build for production**
-
-   ```bash
-   npm run build
-   ```
-
-6. **Preview production build**
-   ```bash
-   npm run preview
-   ```
-
----
-
-## 🔑 Authentication Flow
-
-- User logs in via the `/login` endpoint using RTK Query mutation
-- Access token is stored in localStorage or sessionStorage
-- Protected routes verify token before rendering
-- RTK Query automatically attaches token to API requests
-
----
-
-## 📜 Scripts
-
-| Command           | Description              |
-| ----------------- | ------------------------ |
-| `npm run dev`     | Start development server |
-| `npm run build`   | Build for production     |
-| `npm run preview` | Preview production build |
-
----
-
-## 🧑‍💻 Author
-
-Kayode Toluhi
