@@ -8,6 +8,8 @@ import useAuth from "../../hooks/useAuth";
 import Deposit from "../../components/Deposit";
 import Swap from "../../components/Swap";
 import { Link } from "react-router";
+import WalletBalancesChart from "../../components/WalletBalancesChart";
+import Transfer from "../../components/Transfer";
 
 const Dashboard = () => {
   const auth = useAuth();
@@ -29,53 +31,67 @@ const Dashboard = () => {
   };
 
   return (
-    <main className="relative w-full flex flex-col h-screen overflow-hidden bg-gradient-to-br from-purple-950 via-pink-950 to-indigo-950">
+    <main className="relative w-full flex flex-col overflow-hidden bg-gradient-to-br from-purple-950 via-pink-950 to-indigo-950">
       <header className="relative top-0 left-0 border-b-1 text-3xl border-[#FF670030] flex flex-col justify-center text-white items-center w-full py-2">
-        <span className="flex items-center gap-3">
+        <span className="flex items-center gap-3 text-base md:text-2xl lg:text-3xl">
           Welcome <span className="capitalize">{auth?.userPayload?.data?.data?.name}</span>
           <Link to={"/profile"} className="w-fit text-yellow-200 rounded-lg overflow-hidden">
             <p>Go to Profile</p>
           </Link>{" "}
         </span>
-        <span className="text-sm">Your total balance is ${getWalletBalances?.data?.total_usd}</span>
+        <span className="text-sm">Your total balance is ${getWalletBalances?.data?.data?.total_usd}</span>
       </header>
 
-      <div className="w-full flex flex-col justify-center items-center py-10 text-white">
-        <div className="flex flex-col gap-2 justify-center items-center text-center">
-          {getWallet.isLoading ? (
-            <p>Getting Wallet Id....</p>
-          ) : userWalletDetails?.data?.id ? (
-            <div>
-              <p>Here is your wallet id {userWalletDetails?.data?.id}</p>
+      <div className="overflow-auto py-10 px-3">
+        <div className="w-full flex flex-col justify-center items-center py-10 text-white">
+          <div className="flex flex-col gap-2 justify-center items-center text-center">
+            {getWallet.isLoading ? (
+              <p>Getting Wallet Id....</p>
+            ) : userWalletDetails?.data?.id ? (
+              <div>
+                <p>Here is your wallet id {userWalletDetails?.data?.id}</p>
+              </div>
+            ) : (
+              <>
+                <p className="text my-2">Thank you for choosing Fx-Exchange to get started please</p>
+                <div className="w-fit cursor-pointer border-white border rounded-lg overflow-hidden">
+                  <GeneralButton text="Create Wallet" onclick={createWallet} loading={createWalletMutationResults.isLoading} loaderComponent={<ButtonLoader />} />
+                </div>{" "}
+              </>
+            )}
+          </div>
+          {userWalletDetails?.data?.id && (
+            <div className="">
+              <p className="text-orange-200 text-xl text-center mt-3">Deposit</p>
+              <Deposit />
             </div>
-          ) : (
-            <>
-              <p className="text my-2">Thank you for choosing Fx-Exchange to get started please</p>
-              <div className="w-fit cursor-pointer border-white border rounded-lg overflow-hidden">
-                <GeneralButton text="Create Wallet" onclick={createWallet} loading={createWalletMutationResults.isLoading} loaderComponent={<ButtonLoader />} />
-              </div>{" "}
-            </>
           )}
-        </div>
-        {userWalletDetails?.data?.id && (
-          <div className="">
-            <p className="text-orange-200 text-xl text-center mt-3">Deposit</p>
-            <Deposit />
-          </div>
-        )}
 
-        {userWalletDetails?.data?.id && (
-          <div className="">
-            <p className="text-orange-200 text-xl text-center mt-3">Swap</p>
-            <Swap />
-          </div>
-        )}
-        <p className="text-white text-2xl mb-4">
-          Email: <span>{auth?.userPayload?.data?.data?.email}</span>
-        </p>
+          {userWalletDetails?.data?.id && (
+            <div className="">
+              <p className="text-orange-200 text-xl text-center mt-3">Deposit</p>
+              <Transfer />
+            </div>
+          )}
 
-        <div className="w-fit">
-          <GeneralButton text="Log Out" onclick={() => dispatch(logOutUser())} />
+          {userWalletDetails?.data?.id && (
+            <div className="">
+              <p className="text-orange-200 text-xl text-center mt-3">Swap</p>
+              <Swap />
+            </div>
+          )}
+          {getWalletBalances.isSuccess && (
+            <div>
+              <WalletBalancesChart balances={getWalletBalances?.data?.data?.balances} />
+            </div>
+          )}
+          <p className="text-white text-2xl mb-4">
+            Email: <span>{auth?.userPayload?.data?.data?.email}</span>
+          </p>
+
+          <div className="w-fit">
+            <GeneralButton text="Log Out" onclick={() => dispatch(logOutUser())} />
+          </div>
         </div>
       </div>
     </main>

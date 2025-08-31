@@ -88,5 +88,12 @@ export const QueryApi = createApi({
       }),
       invalidatesTags: ["USERS"],
     }),
+    getHistory: builder.query({
+      query: () => ({
+        url: "wallets/history",
+        method: "GET",
+      }),
+      providesTags: ["USERS"],
+    }),
   }),
 });

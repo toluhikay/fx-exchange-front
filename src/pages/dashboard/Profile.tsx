@@ -6,6 +6,7 @@ import { logOutUser } from "../../features/authSlice";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router";
+import TransactionExplorer from "../../components/TransactionExplorer";
 
 const Profile = () => {
   const auth = useAuth();
@@ -15,8 +16,7 @@ const Profile = () => {
   const getWallet = QueryApi.useGetWalletQuery({});
   const userWalletDetails = getWallet?.data;
   const getWalletBalances = QueryApi.useGetBalancesQuery({});
-
-  console.log(getWalletBalances);
+  const getWalletHistory = QueryApi.useGetHistoryQuery({});
 
   const createWallet = async () => {
     try {
@@ -29,19 +29,19 @@ const Profile = () => {
   };
 
   return (
-    <main className="relative w-full flex flex-col h-screen overflow-hidden bg-gradient-to-br from-purple-950 via-pink-950 to-indigo-950">
-      <header className="relative top-0 left-0 border-b-1 text-3xl border-[#FF670030] flex flex-col justify-center text-white items-center w-full py-2">
-        <span className="flex items-center gap-3">
+    <main className="relative w-full min-h-screen flex flex-col overflow-hidden bg-gradient-to-br from-purple-950 via-pink-950 to-indigo-950">
+      <header className="sticky top-0 left-0 border-b-1 text-3xl border-[#FF670030] flex flex-col justify-center text-white items-center w-full py-2">
+        <span className="flex items-center gap-3 text-base md:text-2xl lg:text-3xl">
           Welcome <span className="capitalize">{auth?.userPayload?.data?.data?.name}</span>
           <Link to={"/dashboard"} className="w-fit text-yellow-200 rounded-lg overflow-hidden">
             <p>Go to Dashboard</p>
           </Link>{" "}
         </span>
-        <span className="text-sm">Your total balance is ${getWalletBalances?.data?.total_usd}</span>
+        <span className="text-sm">Your total balance is ${getWalletBalances?.data?.data?.total_usd}</span>
       </header>
 
-      <div className="w-full flex flex-col justify-center items-center py-10 text-white">
-        <div className="flex flex-col gap-2 justify-center items-center text-center">
+      <div className="w-full flex flex-col justify-center items-center py-10 text-white overflow-auto h-auto px-3">
+        <div className="flex flex-col gap-2 justify-center items-center text-center mt-2">
           {getWallet.isLoading ? (
             <p>Getting Wallet Id....</p>
           ) : userWalletDetails?.data?.id ? (
@@ -69,6 +69,10 @@ const Profile = () => {
                   </div>
                 )
             )}
+        </div>
+
+        <div>
+          <TransactionExplorer transactions={getWalletHistory?.data?.data} isLoading={getWalletHistory.isLoading} error={getWalletHistory.error} />
         </div>
 
         <p className="text-white text-2xl mb-4">
