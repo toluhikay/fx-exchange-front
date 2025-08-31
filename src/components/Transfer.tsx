@@ -15,7 +15,7 @@ type FormValues = {
 };
 
 const Transfer = () => {
-  const [swapMutation, { isLoading, isSuccess }] = QueryApi.useSwapMutation();
+  const [transferMutation, { isLoading, isSuccess }] = QueryApi.useTransferMutation();
   const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(
       Yup.object().shape({
@@ -28,13 +28,13 @@ const Transfer = () => {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      const response = await swapMutation({
+      const response = await transferMutation({
         receiver_id: data.receiver_id,
         currency: data.currency,
         amount: data.amount,
       }).unwrap();
 
-      toast.success("Swap successful");
+      toast.success("Transfer successful");
       reset();
       console.log("success:", response);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -88,6 +88,14 @@ export const QueryApi = createApi({
       }),
       invalidatesTags: ["USERS"],
     }),
+    transfer: builder.mutation({
+      query: (body) => ({
+        url: "wallets/transfer",
+        body,
+        method: "POST",
+      }),
+      invalidatesTags: ["USERS"],
+    }),
     getHistory: builder.query({
       query: () => ({
         url: "wallets/history",
