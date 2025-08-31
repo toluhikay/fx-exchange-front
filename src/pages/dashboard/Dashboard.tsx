@@ -31,7 +31,7 @@ const Dashboard = () => {
   };
 
   return (
-    <main className="relative w-full flex flex-col overflow-hidden bg-gradient-to-br from-purple-950 via-pink-950 to-indigo-950">
+    <main className="relative w-full flex flex-col min-h-screen bg-gradient-to-br from-purple-950 via-pink-950 to-indigo-950">
       <header className="relative top-0 left-0 border-b-1 text-3xl border-[#FF670030] flex flex-col justify-center text-white items-center w-full py-2">
         <span className="flex items-center gap-3 text-base md:text-2xl lg:text-3xl">
           Welcome <span className="capitalize">{auth?.userPayload?.data?.data?.name}</span>

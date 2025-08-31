@@ -6,7 +6,7 @@ Operation Borderless is a fintech platform for managing digital wallets holding 
 
 ## Features
 
-- **Wallet Creation**: Create a wallet with a unique email or mobile identifier.
+- **Wallet Creation**: Create a wallet with a unique email.
 - **Deposit**: Add funds to a wallet in supported stablecoins (e.g., cNGN, USDx).
 - **Swap**: Convert funds between stablecoins using real-time exchange rates.
 - **Transfer**: Send funds to another wallet, tracking both sender and receiver.
@@ -20,8 +20,8 @@ Operation Borderless is a fintech platform for managing digital wallets holding 
 - **React**: JavaScript library for building the user interface.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
 - **RTK QUERY**: For making API requests to the backend.
-- **RTK**: For global state management.
 - **React Router**: For client-side routing.
+- **Redux Persist**: For persisting state.
 - **Node.js**: For development and build tools.
 
 ## Prerequisites
